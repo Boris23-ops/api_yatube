@@ -1,9 +1,10 @@
-from rest_framework import permissions, viewsets
+from rest_framework import permissions
 from rest_framework.generics import get_object_or_404
+from rest_framework import viewsets
 
+from api.permissions import IsAuthor
 from api.serializer import CommentSerializer, GroupSerializer, PostSerializer
 from posts.models import Group, Post
-from .permissions import IsAuthor
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -19,6 +20,7 @@ class PostViewSet(viewsets.ModelViewSet):
 
 class GroupViewSet(viewsets.ReadOnlyModelViewSet):
     """Обрабатывает API запросы для модели Групп."""
+
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
